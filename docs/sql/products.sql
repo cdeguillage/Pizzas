@@ -31,10 +31,27 @@ INSERT INTO pizza_has_size (pizza_id, size_id) VALUES (1, 1), (1, 2), (1, 3), (1
 INSERT INTO pizza_has_size (pizza_id, size_id) VALUES (4, 3), (4, 4), (3, 2), (3, 1), (3, 3);
 
 /*SELECT phs.*, '***' sep0, p.*, '***' sep1, s.**/
-SELECT p.name, p.price, p.image, s.name, s.price,
-       p.price + s.price as price_final
+SELECT p.name as pizza,
+	   s.name as size,
+       p.price as price_pizza,
+       s.price as price_size,
+       p.price + s.price as price_final,
+       p.image
   FROM pizza_has_size phs
 	   INNER JOIN pizza p ON phs.pizza_id = p.id
 	   INNER JOIN size s  ON phs.size_id  = s.id
 ORDER BY phs.pizza_id, phs.size_id;
 
+CREATE VIEW ExpansivePizza AS
+SELECT p.name as pizza,
+	   s.name as size,
+       p.price as price_pizza,
+       s.price as price_size,
+       p.price + s.price as price_final,
+       p.image
+  FROM pizza_has_size phs
+	   INNER JOIN pizza p ON phs.pizza_id = p.id
+	   INNER JOIN size s  ON phs.size_id  = s.id
+ORDER BY 5 DESC;
+
+SELECT * FROM ExpansivePizza;
