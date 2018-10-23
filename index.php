@@ -10,6 +10,9 @@ try
                  PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
                 // Charset
                  PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+                // Choix des clés retournés dans les tableaux FETCH et FETCHALL
+                // PDO::FETCH_NUM ou PDO::FETCH_ASSOC
+                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 ]
     );
 }
@@ -47,7 +50,7 @@ $query_one = $db->query('SELECT * FROM pizza');
 echo '* FETCH ******************************************************<br />';
 echo '**************************************************************<br />';
 echo '**************************************************************<br />';
-while( $pizza = $query_one->fetch() ) {
+while( $pizza = $query_one->fetch(/*PDO::FETCH_ASSOC*/) ) {
     echo '<h1>'.$pizza['name'].'</h1><br />';
     echo '**************************************************************<br />';
 }
